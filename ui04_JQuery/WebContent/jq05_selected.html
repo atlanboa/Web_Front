@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+			//1.select태그의 자식태그인 option 중에서 친구 한명을 선택..한 값을 변수에 할당
+			//var value = $('select>option:selected').val();
+			
+			/* setTimeout(function() {
+				var value = $('select>option:selected').val();
+				alert("내 베프는~~~" + value);
+			}, 3000); */
+			
+			//3. 2번에서 했던 내용을 바탕으로 선택한 친구의 이름이 아래 폼박스에 출력되도록 로직을 작성
+			//val 함수는 무조건 form에 있는 값 받아온다.
+			setTimeout(function() {
+					var value = $('select>option:selected').val();
+					$('input[type=text]').val(value);
+			}, 3000);
+		});
+</script>
+
+</head>
+<body>
+<h2>친 구 찾 기</h2>
+<form>
+<select>
+		<option>사그다덕</option>
+		<option>석드래곤</option>
+		<option>상현이</option>
+		<option>상헌이</option>
+</select>
+<br></br>
+<!-- 폼 추가 -->
+선택한 친구 이름 :: <input type = "text" size = "17">
+</form>
+</body>
+</html>

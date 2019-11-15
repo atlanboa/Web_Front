@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+		<member>
+				<name>이효리</name>
+				<age>40</age>
+				<addr>제주</addr>
+		</member>
+		<member>
+				<name>이진</name>
+				<age>38</age>
+				<addr>뉴욕</addr>
+		</member>
+		<member>
+				<name>성유리</name>
+				<age>37</age>
+				<addr>서울</addr>
+		</member>
+</info>

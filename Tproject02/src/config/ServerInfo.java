@@ -1,0 +1,8 @@
+package config;
+
+public interface ServerInfo {
+	String DRIVER_NAME ="com.mysql.cj.jdbc.Driver";
+	String URL = "jdbc:mysql://127.0.0.1:3306/friproject?serverTimezone=UTC&useUnicode=yes";
+	String USER = "root";
+	String PASS = "1234";
+}

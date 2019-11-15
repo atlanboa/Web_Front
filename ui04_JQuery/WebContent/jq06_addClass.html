@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.view1{ font-size: 40px; }
+	.view2{ background: yellow; 
+					color : red;
+	}
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+			$('p, div').addClass('view1');
+			$('#st').addClass('view2');
+			
+		});
+</script>
+
+</head>
+<body>
+<h2>JQuery를 구조적으로 작성하는 방법 :: addClass() 함수 이용하기</h2>
+<p>Hello Jquery AddClass</p>
+<strong id = "st">addClass()는 jquery코드와 css를 분리하는 함수이다.</strong>
+<div class = "ssafy">WOW Lunch Time~~~</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+			$('h1').click(function() {
+				$(this).append('★');
+			}); //click
+			
+			//1. trigger 함수는 별도의 액션을 취하지 않아도 이벤트를 진행시키는 기능...
+			//3초 뒤에 이벤트가 강제로 발생하도록... trigger, setInterval
+			setInterval(function() {
+				$('h1').trigger('click');
+			}, 1000);
+			
+			setTimeout(function() {
+				$('h1').unbind();
+			}, 6000);
+		});
+</script>
+
+</head>
+<body>
+<h1>STAR :: </h1>
+</body>
+</html>

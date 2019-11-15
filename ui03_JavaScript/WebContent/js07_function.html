@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>선언적함수 재정의 | 익명함수 재정의</title>
+<script type="text/javascript">
+		//1. 익명함수 재정의
+		/* var func = function(){alert("func A");}
+		var func = function(){alert("func B");}
+		func(); */
+		
+		//2. 선언적 함수 재정의
+		/* func();
+		function func(){alert("func A");}
+		function func(){alert("func B");} */
+		
+		//3. 익명함수 + 선언적 함수가 함께 사용되었을 때 실행순서
+		var func = function(){alert("func inner");} //2 나중 생성
+		function declear(){alert("func declear");} //1 먼저 생성
+		func();//func inner
+</script>
+</head>
+<body>
+
+</body>
+</html>

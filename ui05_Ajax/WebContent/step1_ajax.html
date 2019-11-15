@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JavaScript Ajax</title>
+<style>
+		
+</style>
+<script>
+	var xhr;
+	var id;
+	function startRequest(){
+			id = document.getElementById("id").value;
+			
+			//1. XMLHttpRequest 생성...
+			xhr = new XMLHttpRequest();
+			alert("객체생성한 직후" + xhr.readyState);
+			//2. callback 함수 등록(응답 시 처리함)
+			xhr.onreadystatechange = callback;
+			
+			//3. 어디로 탁구공 날라갈지 지정함
+			xhr.open('get','GetAjaxServlet?id=' + id);
+			alert("오픈 직후" + xhr.readyState);
+			//4. 실제로 날림
+			xhr.send(null);
+			alert("Send 직후" + xhr.readyState);
+	}
+	
+	function callback(){ //응답부분
+			if(xhr.readyState == 4){
+				if(xhr.status==200){
+						var text = xhr.responseText;
+						document.getElementById("resultView").innerHTML = 
+							"<font color=magenta size=7>" + text + "</font>";
+				}
+			}else{
+				document.getElementById("resultView").innerHTML = 
+					"<img src='img/a.gif'>";
+			}
+	}
+</script>
+
+</head>
+<body>
+<h2>비동기 통신 요청하기</h2>
+ID : <input type="text" name="id" id="id">
+<input type="button" value="중복확인" onclick="startRequest()">
+<span id="resultView"></span>
+</body>
+</html>

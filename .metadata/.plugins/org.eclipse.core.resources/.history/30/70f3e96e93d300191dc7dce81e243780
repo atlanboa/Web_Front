@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SafeFood-Info</title>
+<style>
+footer {
+	color: grey;
+}
+
+.modal-header, h4, .close {
+	background-color: gray;
+	color: white !important;
+	text-align: center;
+	font-size: 30px;
+}
+
+.modal-footer {
+	background-color: #f9f9f9;
+}
+</style>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script type="text/javascript">
+	$(function() {
+		$.ajax({
+			type : "post",
+			url : "http://localhost:8888/Tproject02/FoodNutritionInfo.xml",
+			dataType : "xml",
+			success : function(result) {
+				temp = result;
+				str = "";
+				$(result).find("item").each(function() {
+					var DESC_KOR = $(this).find("DESC_KOR").text();
+					if (DESC_KOR == "${param.name}") {
+						SERVING_WT = $(this).find("SERVING_WT").text();
+						NUTR_CONT1 = $(this).find("NUTR_CONT1").text();
+						NUTR_CONT2 = $(this).find("NUTR_CONT2").text();
+						NUTR_CONT3 = $(this).find("NUTR_CONT3").text();
+						NUTR_CONT4 = $(this).find("NUTR_CONT4").text();
+						NUTR_CONT5 = $(this).find("NUTR_CONT5").text();
+						NUTR_CONT6 = $(this).find("NUTR_CONT6").text();
+						NUTR_CONT7 = $(this).find("NUTR_CONT7").text();
+						NUTR_CONT8 = $(this).find("NUTR_CONT8").text();
+						NUTR_CONT9 = $(this).find("NUTR_CONT9").text();
+
+						str += "<tr>"
+						str += "<th>" + "일일 제공량" + "</th>"
+						str += "<td>" + SERVING_WT + "</td>"
+						str += "</tr>"
+
+						str += "<tr>"
+						str += "<th>" + "칼로리" + "</th>"
+						str += "<td>" + NUTR_CONT1 + "</td>"
+						str += "</tr>"
+
+						str += "<tr>"
+						str += "<th>" + "탄수화물" + "</th>"
+						str += "<td>" + NUTR_CONT2 + "</td>"
+						str += "</tr>"
+
+						str += "<tr>"
+						str += "<th>" + "단백질" + "</th>"
+						str += "<td>" + NUTR_CONT3 + "</td>"
+						str += "</tr>"
+
+						str += "<tr>"
+						str += "<th>" + "지방" + "</th>"
+						str += "<td>" + NUTR_CONT4 + "</td>"
+						str += "</tr>"
+
+						str += "<tr>"
+						str += "<th>" + "당류" + "</th>"
+						str += "<td>" + NUTR_CONT5 + "</td>"
+						str += "</tr>"
+
+						str += "<tr>"
+						str += "<th>" + "나트륨" + "</th>"
+						str += "<td>" + NUTR_CONT6 + "</td>"
+						str += "</tr>"
+
+						str += "<tr>"
+						str += "<th>" + "콜레스테롤" + "</th>"
+						str += "<td>" + NUTR_CONT7 + "</td>"
+						str += "</tr>"
+
+						str += "<tr>"
+						str += "<th>" + "포화지방산" + "</th>"
+						str += "<td>" + NUTR_CONT8 + "</td>"
+						str += "</tr>"
+
+						str += "<tr>"
+						str += "<th>" + "트렌스지방" + "</th>"
+						str += "<td>" + NUTR_CONT9 + "</td>"
+						str += "</tr>"
+
+						$("#ftable").append(str);
+					}
+				});
+			}
+		})
+	});
+
+	google.charts.load("current", {
+		packages : [ "corechart" ]
+	});
+	google.charts.setOnLoadCallback(drawChart);
+	var SERVING_WT, NUTR_CONT1, NUTR_CONT2, NUTR_CONT3, NUTR_CONT4, NUTR_CONT5, NUTR_CONT6, NUTR_CONT7, NUTR_CONT8, NUTR_CONT9;
+
+	function drawChart() {
+		$
+				.ajax({
+					type : "post",
+					url : "http://localhost:8888/Tproject02/FoodNutritionInfo.xml",
+					dataType : "xml",
+					success : function(result) {
+						temp = result;
+						str = "";
+						$(result)
+								.find("item")
+								.each(
+										function() {
+											var DESC_KOR = $(this).find(
+													"DESC_KOR").text();
+											if (DESC_KOR == "${param.name}") {
+												SERVING_WT = $(this).find(
+														"SERVING_WT").text();
+												NUTR_CONT1 = $(this).find(
+														"NUTR_CONT1").text();
+												NUTR_CONT2 = $(this).find(
+														"NUTR_CONT2").text();
+												NUTR_CONT3 = $(this).find(
+														"NUTR_CONT3").text();
+												NUTR_CONT4 = $(this).find(
+														"NUTR_CONT4").text();
+												NUTR_CONT5 = $(this).find(
+														"NUTR_CONT5").text();
+												NUTR_CONT6 = $(this).find(
+														"NUTR_CONT6").text();
+												NUTR_CONT7 = $(this).find(
+														"NUTR_CONT7").text();
+												NUTR_CONT8 = $(this).find(
+														"NUTR_CONT8").text();
+												NUTR_CONT9 = $(this).find(
+														"NUTR_CONT9").text();
+												var data = google.visualization
+														.arrayToDataTable([
+																[ 'Language',
+																		'Speakers (in millions)' ],
+																[
+																		'일일 제공량',
+																		Number(SERVING_WT) ],
+																[
+																		'칼로리',
+																		Number(NUTR_CONT1) ],
+																[
+																		'탄수화물',
+																		Number(NUTR_CONT2) ],
+																[
+																		'단백질',
+																		Number(NUTR_CONT3) ],
+																[
+																		'지방',
+																		Number(NUTR_CONT4) ],
+																[
+																		'당류',
+																		Number(NUTR_CONT5) ],
+																[
+																		'나트륨',
+																		Number(NUTR_CONT6) ],
+																[
+																		'콜레스테롤',
+																		Number(NUTR_CONT7) ],
+																[
+																		'포화지방산',
+																		Number(NUTR_CONT8) ],
+																[
+																		'트랜스지방',
+																		Number(NUTR_CONT9) ] ]);
+												var options = {
+													legend : 'none',
+													pieSliceText : 'label',
+													slices : {
+														4 : {
+															offset : 0.2
+														},
+														12 : {
+															offset : 0.3
+														},
+														14 : {
+															offset : 0.4
+														},
+														15 : {
+															offset : 0.5
+														},
+													},
+												};
+
+												var chart = new google.visualization.PieChart(
+														document
+																.getElementById('piechart'));
+												chart.draw(data, options);
+											}
+										});
+					}
+				})
+	}
+
+	$(document).ready(function() {
+		$("#myBtn1").click(function() {
+			$("#myModal1").modal();
+		});
+		$("#myBtn2").click(function() {
+			$("#myModal2").modal();
+		});
+	});
+</script>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-sm bg-light justify-content-end">
+			<!-- Links -->
+			<ul class="navbar-nav">
+				<li><button type="button" class="btn btn-primary" id="myBtn1">
+						<i style='font-size: 8px' class='fas'>&#xf007;</i> 로그인
+					</button></li>
+				<div class="modal fade" id="myModal1" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header" style="padding: 35px 50px;">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4>
+									<span class="glyphicon glyphicon-lock"></span> 로그인
+								</h4>
+							</div>
+							<div class="modal-body" style="padding: 40px 50px;">
+								<form role="form">
+									<div class="form-group">
+										<label for="usrname"><span
+											class="glyphicon glyphicon-user"></span> 이름</label> <input
+											type="text" class="form-control" id="usrname"
+											placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label for="psw"><span
+											class="glyphicon glyphicon-eye-open"></span> 비밀번호</label> <input
+											type="text" class="form-control" id="psw"
+											placeholder="Enter password">
+									</div>
+									<div class="checkbox">
+										<label><input type="checkbox" value="" checked>Remember
+											me</label>
+									</div>
+									<button type="submit" class="btn btn-primary btn-block">
+										<span class="glyphicon glyphicon-off"></span> 로그인
+									</button>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<div align="center">
+									<a href="./SearchID.html">비밀번호가 기억나지 않으세요?</a>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				&nbsp;&nbsp;
+				<li><button type="button" class="btn btn-primary" id="myBtn2">
+						<i style='font-size: 8px' class='fas'>&#xf007;</i> 회원가입
+					</button></li>
+				<div class="modal fade" id="myModal2" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header" style="padding: 35px 50px;">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4>
+									<span class="glyphicon glyphicon-lock"></span> 회원가입
+								</h4>
+							</div>
+							<div class="modal-body" style="padding: 40px 50px;">
+								<form role="form">
+									<div class="form-group">
+										<label for="usrname"><span
+											class="glyphicon glyphicon-user"></span> 아이디</label> <input
+											type="text" class="form-control" id="usrname"
+											placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label for="psw"><span
+											class="glyphicon glyphicon-eye-open"></span> 비빌번호</label> <input
+											type="text" class="form-control" id="psw"
+											placeholder="영문 숫자 포함 6자리 이상">
+									</div>
+									<div class="form-group">
+										<label for="psw"><span
+											class="glyphicon glyphicon-eye-open"></span> 이름</label> <input
+											type="text" class="form-control" id="psw"
+											placeholder="user name">
+									</div>
+									<div class="form-group">
+										<label for="psw"><span
+											class="glyphicon glyphicon-eye-open"></span> 주소</label> <input
+											type="text" class="form-control" id="psw"
+											placeholder="address">
+									</div>
+									<div class="form-group">
+										<label for="psw"><span
+											class="glyphicon glyphicon-eye-open"></span> 전화번호</label> <input
+											type="text" class="form-control" id="psw"
+											placeholder="010-xxxx-xxxx">
+									</div>
+									<div class="form-group">
+										<label for="psw"><span
+											class="glyphicon glyphicon-eye-open"></span> 알레르기</label>
+										<div class="checkbox">
+											<input type="checkbox" value="" checked>종류 <input
+												type="checkbox" value="" checked>종류 <input
+												type="checkbox" value="" checked>종류 <input
+												type="checkbox" value="" checked>종류<br> <input
+												type="checkbox" value="" checked>종류 <input
+												type="checkbox" value="" checked>종류 <input
+												type="checkbox" value="" checked>종류 <input
+												type="checkbox" value="" checked>종류
+										</div>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button type="submit"
+									class="btn btn-primary btn-default pull-left"
+									data-dismiss="modal">
+									<span class="glyphicon glyphicon-remove"></span> 가입
+								</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</ul>
+		</nav>
+		<img src="img/header-logo.jpg"
+			style="float: left; margin-left: 20px; margin-top: 5px" height="50px">
+		<nav
+			class="navbar navbar-expand-sm bg-white navbar-light justify-content-end">
+			<!-- Links -->
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="#">공지 사항</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">상품 정보</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">베스트 섭취 정보</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">내 섭취 정보</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">예상 섭취 정보</a></li>
+				<li class="nav-item"><a class="nav-link" href="#"><i
+						style='font-size: 24px' class='fas'>&#xf002;</i></a></li>
+			</ul>
+		</nav>
+	</header>
+	<div class="jumbotron bg-secondary text-white" style="margin: 0">
+		<h1 align="center">WHAT WE PROVIDE</h1>
+		<hr class="bg-light" width="600px">
+		<h3 align="center">건강한 삶을 위한 먹거리 프로젝트</h3>
+	</div>
+	<br>
+	<br>
+	<section jumbotron>
+		<h2 align="center">제품 정보</h2>
+	</section>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<img src="http://fakeimg.pl/300/">
+			</div>
+			<div class="col-sm-8">
+				<h2>Basic Table</h2>
+				<p>The .table class adds basic styling (light padding and
+					horizontal dividers) to a table:</p>
+				<table
+					class="table table-striped table-bordered table-hover table-dark">
+					<thead>
+						<tr>
+							<th>Firstname</th>
+							<th>Lastname</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>John</td>
+							<td>Doe</td>
+							<td>john@example.com</td>
+						</tr>
+						<tr>
+							<td>Mary</td>
+							<td>Moe</td>
+							<td>mary@example.com</td>
+						</tr>
+						<tr>
+							<td>July</td>
+							<td>Dooley</td>
+							<td>july@example.com</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="container">
+					<form class="form-inline" action="/action_page.php">
+						<label for="email">수량: </label> &nbsp;&nbsp; <input type="number"
+							class="form-control" id="number"> &nbsp;&nbsp;
+						<div class="btn-group">
+							<button type="button" class="btn btn-outline-secondary">담
+								기</button>
+							<button type="button" class="btn btn-outline-secondary">찜</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<section jumbotron>
+		<h2 align="center">영양 정보</h2>
+	</section>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6">
+				<div align="left" id="piechart" style="width: 600px; height: 600px;"></div>
+			</div>
+			<div class="col-sm-6">
+				<table id="ftable"
+					class="table table-striped table-bordered table-hover table-dark">
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<footer id="main_footer" class="text-center">
+		<h3>Find Us</h3>
+		<hr>
+		<nav class="navbar justify-content-center">
+			<ul class="navbar-nav">
+				<li class="nav-item"><i style='font-size: 22px' class='fas'>&#xf3c5;</i>
+					구미시</li>
+				<li class="nav-item"><i style='font-size: 20px' class='fas'>&#xf095;</i>
+					7942-7942</li>
+				<li class="nav-item"><a class="nav-link" href="#"><i
+						style='font-size: 22px' class='far'>&#xf0e0;</i> abc@naver.com</a></li>
+			</ul>
+		</nav>
+	</footer>
+</body>
+</html>

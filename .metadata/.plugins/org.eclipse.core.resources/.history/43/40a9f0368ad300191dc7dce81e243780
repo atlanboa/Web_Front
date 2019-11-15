@@ -1,0 +1,210 @@
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+	pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.s-nav-row {
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.s-nav-row s-nav {
+	width: 10%;
+	margin: 0px auto;
+}
+
+.s-nav.p-3:hover {
+	cursor: pointer;
+	background: #dddddd;
+}
+
+.s-div-hover :hover {
+	cursor: pointer;
+	color: white;
+}
+
+div-center div {
+	margin: 0 auto
+}
+
+h3 {
+	display: inline;
+}
+
+#productImg {
+	margin-top: 50px;
+	width: 100%;
+}
+</style>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- jquery 선언부가 먼저나오고 부트스트랩 선언부가 와야함 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['칼로리',     11],
+          ['탄수화물',      2],
+          ['단백질',  2],
+          ['지방', 2],
+          ['당류',    7]
+          ['나트륨',    7]
+          ['콜레스테롤',    7]
+          ['포화 지방산',    7]
+          ['트렌스지방',    7]
+        ]);
+
+        var options = {
+          title: '영양 정보';
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+ </script>
+<script>
+	$(function() {
+		$.ajax({
+			type:'post',
+			url:'http://localhost:8888/Tproject02/foodInfo.xml',
+			dataType:'xml',
+			success:function(result){
+				var str = '';
+				$(result).find('food').each(function(index, item){
+					var code = $(this).find('code').text();
+					if(code == <%= request.getParameter("code") %>){
+						var name = $(this).find('name').text();
+						var maker = $(this).find('maker').text();
+						var material = $(this).find('material').text();
+						var image = $(this).find('image').text();
+						
+						$('#pName').text(name);
+						$('#material').text(material);
+						$('#maker').text(maker);
+						$("#productImg").attr("src", "image/"+image);
+					}
+				});	
+			}
+		});
+		$('#productBtn').click(function() {
+			location.href = 'productPage.html';
+		})
+	});
+</script>
+
+</head>
+<body>
+	<div>
+		<!-- class="fixed-top" -->
+		<nav
+			class="navbar navbar-expand-sm bg-primary navbar-dark justify-content-end">
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary">회원가입</button>
+				<button type="button" class="btn btn-primary">로그인</button>
+			</div>
+		</nav>
+		<div class="container bg-light">
+			<div class="row s-nav-row">
+				<div class="col-sm-2 s-nav">
+					<a href="mainPage.html"><img alt=""
+						src="image/page_image/header-logo.jpg" id="logo-hover"> </a>
+				</div>
+				<div class="col-sm-2 s-nav p-3 ">공지사항</div>
+				<div id="productBtn" class="col-sm-2 s-nav p-3">상품정보</div>
+				<div class="col-sm-2 s-nav p-3">베스트섭취정보</div>
+				<div class="col-sm-2 s-nav p-3">내섭취정보</div>
+				<div class="col-sm-2 s-nav p-3">예상섭취정보</div>
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+	<div class="container-fluid jumbotron text-center container"
+		style="background-color: rgb(153, 217, 234); margin-top: 10px; margin-bottom: 10px;">
+		<h1 style="color: white">WHAT WE PROVIDE</h1>
+		<hr width="500">
+		<br>
+		<div class="row div-center">
+			<div class="col-sm-3 "></div>
+			<div class="col-sm-6 ">
+				<div class="row input-group mt-3 mb-3">
+
+					<div class="input-group mb-3">
+						<select name="job">
+							<option value="">전체</option>
+							<option value="학생">상품명</option>
+							<option value="회사원">재료명</option>
+							<option value="기타">회사명</option>
+						</select> <input type="text" class="form-control" placeholder="검색어를 입력하세요">
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="button">OK</button>
+							<button class="btn btn-danger" type="button">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3 "></div>
+		</div>
+	</div>
+	<div class="container">
+
+		<h1 style="text-align: center">제품 정보</h1>
+		<hr>
+		<div class="container" style="width: 1000px; height: 1000px">
+			<div class="row">
+				<div class="col-sm-3">
+					<img id="productImg" alt="아카페라 아메리카노" src="" align=left>
+				</div>
+				<div class="col-sm-9">
+					<h1 id="pName"></h1>
+					<!-- 이름  -->
+					<br> <label>수량 : &nbsp;&nbsp;</label><input type="number"
+						value="0" required="required">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button class="btn btn-primary">추가</button>
+					&nbsp;&nbsp;
+					<button class="btn btn-primary">장바구니 담기</button>
+					<hr></hr>
+					<h3>제조사</h3>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<p id="maker"></p>
+					<!-- 제조사  -->
+					<hr></hr>
+					<h3>원재료</h3>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<p id="material"></p>
+					<hr></hr>
+					<h3>알레르기 성분</h3>
+					<hr></hr>
+				</div>
+
+			</div>
+			
+			<div id="piechart" style="width: 900px; height: 500px;"></div>
+		</div>
+
+	</div>
+</body>
+</html>

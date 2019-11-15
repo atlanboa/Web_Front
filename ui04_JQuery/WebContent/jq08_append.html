@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>append, prepend, before, after</title>
+<style type="text/css">
+		body { 
+		padding: 50px;
+	}
+	div{
+		border: 2px solid #bbb;
+		background-color: #eee;
+		padding: 10px;
+		margin: 10px auto;
+	}
+	span {
+		display: block;
+		width: 65px;
+		font: bold 12px Arial, Sans-Serif;
+		color: white;
+		padding: 5px 10px;
+		background-color: black;
+	}
+</style>
+<script src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+	$(function() {
+			$('div')
+			.append('<span>1. Append </span>')
+			.prepend('<span>2. Prepend </span>')
+			.before('<span>3. Before </span>')
+	});
+</script>
+</head>
+<body>
+	<div>jQuery is a fast, small, and feature-rich JavaScript library. 
+	It makes things like HTML document traversal and manipulation, event handling, animation, 
+	and Ajax much simpler with an easy-to-use API that works across a multitude of browsers</div>
+</body>
+</html>
+<body>
+
+</body>
+</html>

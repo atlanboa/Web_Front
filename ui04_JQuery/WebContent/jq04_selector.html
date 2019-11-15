@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+			/* 전체 태그를 선택자로 지정... */
+			$("*").css('color','blue');
+			
+			$('h2').css('color', 'red');
+			
+			/* h2태그 아이디값이 target인 선택자를 지정... 배경색은 cyan... */
+			$('h2#target').css('background','cyan');
+			
+			/* p태그의 클래스 속성값이 ssafy인 선택자를 지정... 글자색을 green, 경계선을 실선 1px red로 지정 */
+			$('p.ssafy').css('color','green').css('border','1px solid red');
+	
+			/* div의 직계자식인 div태그와 span 태그를 동시에 선택자로 지정... 글자색을 black */
+			/* $('div>div, span').css('color' , 'black'); */
+			$('div p, span').css('color' , 'black');
+
+			/* span 태그중에서 짝수번째 태그를 선택자로 지정..배경색을 yellow, 글자색을 maganta로  */
+			$('span').filter(function(index) {
+				return index % 2 != 0;
+			}).css({
+				background : 'yellow',
+				color : 'magenta',
+			});
+			
+			
+		});
+</script>
+
+</head>
+<body>
+		<h2 id = "header">header scope</h2>
+		<h2 id = "target">target scope</h2>
+		<div>
+				<div>
+						<p class="ssafy content">This is ssafy content first p...</p>
+						<p class="ssafy content">This is ssafy content second p...</p>
+				</div>
+		</div>
+		<span>This is span scope1</span>
+		<span>This is span scope2</span>
+		<span>This is span scope3</span>
+		<span>This is span scope4</span>
+		<span>This is span scope5</span>
+		<span>This is span scope6</span>
+		
+</body>
+</html>

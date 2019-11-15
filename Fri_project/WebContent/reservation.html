@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	.right{
+		text-align: right;
+	}
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+			$.ajax({
+				type: 'post',
+				url:'http://localhost:8888/Fri_project/cinema.xml',
+				datatype: 'xml',
+				
+				success:function(result){
+				var str='';
+				$(result).find('cinema').each(function() {
+					var name = $(this).find("name").text();
+					str += '<option>'+name+'</option>';
+				});//each
+				$('#select').append(str);
+				}//success
+			});
+			
+		  $('.people').click(function() {
+				var cost = $('.people').val() * 5000;
+				$('.cost').val(cost);
+			}) 
+		});
+</script>
+
+</head>
+<body>
+<h1>영화 예매</h1>
+<h2>쿵푸팬더</h2>
+<img alt="" src="img/movie_image2.jpg" width="50%" height="20%">
+<br></br>
+
+<label>상영관</label>
+<select id ='select'>
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label>날짜 선택</label>
+<input type="date"> <br><br> 
+
+<fieldset>
+	<legend>시간 선택</legend> 
+	<input type="radio" name="time" value="08:30" checked="checked">08:30
+	<input type="radio" name="time" value="11:00">11:00
+	<input type="radio" name="time" value="14:20">14:20
+	<input type="radio" name="time" value="17:25">17:25
+	<input type="radio" name="time" value="20:10">20:10
+	<input type="radio" name="time" value="23:05">23:05
+</fieldset><br><br>
+요금 <span><del>W9,000</del></span>&nbsp;&nbsp;<span><ins>W5,000</ins></span><br></br>
+<label>인원 : </label><input type="number" value="0" required="required" class="right people"> <br><br>
+<label>금액 : </label><input type="number" value="0" required="required" class="right cost"> <br><br>
+<input type="checkbox" name="option" value="옵션">옵션
+<br></br>
+<fieldset>
+	<input type="checkbox" name="snack" value="팝콘">팝콘
+	<input type="checkbox" name="snack" value="콜라">콜라
+</fieldset><br><br>
+</body>
+</html>

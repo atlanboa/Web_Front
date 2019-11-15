@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 1)전역 변수 선언법(3).... 2)전역변수는 window 객체와 연결된다. */
+/* var myName = "James";
+//또는
+firstName = "Gosling";
+//또는
+var name;
+name = "James Gosling";
+
+console.log(myName); //James
+console.log(window.firstName); //Gosling
+console.log(window.name); //James Gosling
+console.log(name); */
+
+//2. 전역변수 함수와 함께 사용할 때....
+function showName(){
+	age = 90;
+	console.log(age);
+}
+showName(); //이 부분 호출해야 확인가능...
+console.log(age);
+</script>
+</head>
+<body>
+
+</body>
+</html>

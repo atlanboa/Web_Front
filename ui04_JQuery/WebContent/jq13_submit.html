@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+			//submit()  ..html 폼에 입력된 값을 한꺼번에 받아서 action의 페이지로 전송하는 기능...!!
+			$('#frm').submit(function() {
+				var id = $('userId').val();
+				var name = $('input[name=userName]').val();
+				var addr = $('userAddr').val();
+				
+				return confirm(name+" 님의 정보를 전송하시겠습니까?");
+			});
+		});
+</script>
+
+</head>
+<body>
+<h2>Form에 입력된 값 받아서 jsp파일로 전송하는 함수 :: submit()</h2>
+<form action="jq13_result.jsp" method="get" id="frm">
+아이디 :<input type="text" name="userId" id="userId"><br>
+이 름 : <input type="text" name="userName" id="userName"><br>
+주 소 : <input type="text" name="userAddr" id="userAddr"><br>
+
+<input type="submit" value="값전송">
+</form>
+</body>
+</html>

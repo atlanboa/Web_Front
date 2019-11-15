@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/* 방법1. */
+/* 	input[type=text] {background: red;} */
+/* 방법2. */
+/* 	input:enabled{background: blue;}
+	input:disabled{background: cyan;} */
+	/* 방법3. 이름은 공통적으로 줄 수 잇음 */
+	input[name=address]{background: cyan;}
+	input[name=id]{background: cyan;}
+	
+	/*박스 누르면 오렌지색으로 바뀜 */
+	input:focus {background: orange;}
+</style>
+</head>
+<body>
+<h2>state selector</h2>
+<!-- 다양한 입력양식을 하나에 다 묶어서 넣을때 -->
+<form>
+	<h3>Enabled</h3>
+	<input type="text" name="id">
+
+	<h3>Disabled</h3>
+	<input type="text" name="ids" disabled="disabled">
+	
+	<h3>Read Only</h3>
+	<input type="text" name="id" value="Read Only" readonly="readonly">
+	
+	<!-- 디비에서 not null 인거에 이거 쓰겠지 입력받을때 -->
+	<h3>Required</h3>
+	<input type="text" name="address" required="required">
+</form>
+</body>
+</html>

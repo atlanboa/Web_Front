@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	div#top{
+		border: 1px solid purple;
+	
+	}
+	#middle{ border: 1px solid blue;}
+	#inner{ border: 2px dotted green;}
+
+
+</style>
+</head>
+<body>
+<div id="top"><h1>div scope...</h1></div>
+<div id="middle">
+	<div id="inner">
+		<span>span scope</span>
+		<span>span scope</span>
+		<span>span scope</span>	
+	</div>
+</div>
+</body>
+</html>

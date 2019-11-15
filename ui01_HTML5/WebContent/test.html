@@ -1,0 +1,46 @@
+<!--  -->
+
+<!-- 
+1. html 파일을 작성
+2. html 파일을 WebServer에 배보한다 웹서버 어디에 배포해야되? 웹 서버 루트로 가봐 c밑에 saffy밑에 
+모든 문서(즉, 동적 + 정적)가 저장되는 곳 뭐라했어? webapps에 context path 찾아서 그 안에 넣어야함
+배포해주는거 원래 우리가 해야하는데 누가함? 이클립스가 알아서 해줌
+3. 서버 가동
+4. 브라우저로 서버에 존재하는 파일을 요청
+   http://127.0.0.1:8888/ui01_HTML5/test.html
+   :
+   2 3 4번 모든 과정을 서비스해줌 ide가, 이클립스가
+   그렇기 때문에 우리는 전체 실행되는 메카니즘을 반드시 이해할 필요가 있따
+
+ -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+/*
+	html문서를 좀더 스타일리쉬하게 만드는 기법은 여기에다가... 
+	브라우저는 바디에서 바디까지만 출력함  
+*/
+	body{
+	text-align: center;
+	background: cyan;
+	}
+	
+/*  */
+
+</style>
+</head>
+<body>
+Hello HTML!!
+<!-- HTML의 구성요소는 태그<h1>, 요소 시작부터 끝까지를 말한대 <h1><font color="red">HTML TEST...</font></h1>, 속성color=으로 구성된다  -->
+<h1><font color="red">HTML TEST...</font></h1>
+
+
+
+</body>
+</html>

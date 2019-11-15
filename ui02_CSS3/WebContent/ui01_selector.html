@@ -1,0 +1,80 @@
+<!-- 
+html5 : 화면의 구조를 정의하는 기술임
+css3 : 화면을 스타일리쉬하게 만들어주는 기술
+javascript : 화면을 동적으로 처리할 수 있게하는 기술 => 결론적으로 '이벤트 처리'임 / 버튼 누르면 값이 뜬다던지 등등...
+							   dynamic document는 아님, 진짜 말그대로 움직인다는 거래...
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+  /*전체 선택자 지정 : (*)임 => head, meta 등등 출력안되는거까지 전부 다 포함함 그러나 출력은 body만 되므로 결과적으로는 둘이 똑같이 보임*/
+/* 	* {
+		color: purple;
+	}
+	 */
+	 
+/* 	 body{ color: purple;} */
+	p, div, span{ color: purple;} /* 열거형 선택자 */
+	 
+	h2 {
+		color: orange;
+		font-family: cursive;
+		font-size: 25pt;
+	}
+	/* div 태그인데 id값이 wrap인 선택자를 지정  */
+	div#wrap{ border: 2px solid magenta;}
+	
+/* 	div#wrap {} /* div중에서 id가 wrap인걸 찾음 띄운거랑 안띄운거랑 전혀다름  */
+/* 	div #wrap {} */ /* div 후손 중에서 id가 wrap인 놈을 찾음  */ */
+	
+	/* class속성에 대한 값이 block인 선택자를 지정... 배경색을 cyan으로 */
+	.block{background: cyan;}
+
+
+
+
+</style>
+</head>
+<body>
+	<h2>Style sheet 이용하기</h2>
+	<p>What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the
+		printing and typesetting industry. Lorem Ipsum has been the industry's
+		standard dummy text ever since the 1500s, when an unknown printer took
+		a galley of type and scrambled it to make a type specimen book. It has
+		survived not only five centuries, but also the leap into electronic
+		typesetting, remaining essentially unchanged. It was popularised in
+		the 1960s with the release of Letraset sheets containing Lorem Ipsum
+		passages, and more recently with desktop publishing software like
+		Aldus PageMaker including versions of Lorem Ipsum.</p>
+	<p>Where does it come from? Contrary to popular belief, Lorem Ipsum
+		is not simply random text. It has roots in a piece of classical Latin
+		literature from 45 BC, making it over 2000 years old. Richard
+		McClintock, a Latin professor at Hampden-Sydney College in Virginia,
+		looked up one of the more obscure Latin words, consectetur, from a
+		Lorem Ipsum passage, and going through the cites of the word in
+		classical literature, discovered the undoubtable source. Lorem Ipsum
+		comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et
+		Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC.
+		This book is a treatise on the theory of ethics, very popular during
+		the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit
+		amet..", comes from a line in section 1.10.32. The standard chunk of
+		Lorem Ipsum used since the 1500s is reproduced below for those
+		interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et
+		Malorum" by Cicero are also reproduced in their exact original form,
+		accompanied by English versions from the 1914 translation by H.
+		Rackham.</p>
+	<div id="wrap">
+		<div class="block">
+			<h2>div scope...1</h2>
+		</div>
+		<span>span scop...</span><span>span scop...</span><span>span
+			scop...</span>
+		<div class="block">
+			<h2>div scope...2</h2>
+		</div>
+	</div>
+</body>
+</html>

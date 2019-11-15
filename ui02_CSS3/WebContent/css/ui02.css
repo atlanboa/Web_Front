@@ -1,0 +1,14 @@
+
+	p, div, span{ color: purple;} /* 열거형 선택자 */
+	 
+	h2 {
+		color: orange;
+		font-family: cursive;
+		font-size: 25pt;
+	}
+	/* div 태그인데 id값이 wrap인 선택자를 지정  */
+	div#wrap{ border: 2px solid magenta;}
+
+	/* class속성에 대한 값이 block인 선택자를 지정... 배경색을 cyan으로 */
+	.block{background: cyan;}
+

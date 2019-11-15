@@ -1,0 +1,15 @@
+<members>
+	<member>
+		<id>ssafy</id>
+		<pass>1234</pass>
+		<name>홍길동</name>
+		<addr>진평동 123-2</addr>
+		<phone>010-1234-5678</phone>
+		<allergy>
+			<item>우유</item>
+			<item>새우</item>
+			<item>닭고기</item>
+			<item>복숭아</item>
+		</allergy>
+	</member>
+</members>

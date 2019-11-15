@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+	function push() {
+		alert("예매를 계속 진행하세요");
+	}
+
+
+</script>
+</head>
+<body>
+<h1>영화예매</h1>
+<h2>엑시트</h2>
+<img alt="" src="img/exit.jfif" width="300" height="350">
+<!--다양한 입력양식들이 form 태그안에 입력 -->
+<form action="#"> <!--액션은 필수속성임  action="reservation" 지금은 없으니까 #-->
+<br><br>
+<label>상영관</label>
+<select>
+	<option>메가박스</option>
+	<option>cgv</option>
+	<option>롯데시네마</option>
+	<option>구평극장</option>
+
+</select>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label>날짜 선택</label>
+<input type="date"> <br><br> <!-- 얘는 익스플로러는 안됨  -->
+
+<fieldset>
+	<legend>시간 선택</legend> <!-- 시간은 하나만 선택해야함 그럴때 라디오버튼함 -->
+	<input type="radio" name="time" value="09:00" checked="checked">09:00
+	<input type="radio" name="time" value="11:00">11:00
+	<input type="radio" name="time" value="15:00">15:00
+	<input type="radio" name="time" value="20:00">20:00
+</fieldset><br><br>
+
+<label>인원 : </label><input type="number" value="0" required="required"> <br><br>
+<label>금액 : </label><input type="number" value="0" required="required"> <br><br>
+
+<fieldset>
+	<legend>스낵고르기</legend> <!-- 시간은 하나만 선택해야함 그럴때 라디오버튼함 -->
+	<input type="checkbox" name="snack" value="감자칩">감자칩
+	<input type="checkbox" name="snack" value="콜라">콜라
+	<input type="checkbox" name="snack" value="팝콘">팝콘
+	<input type="checkbox" name="snack" value="오징어">오징어
+</fieldset><br><br>
+<input type="reset" value="CLEAR">
+<input type="submit" value="SEND">
+<input type="button" value="CLICK" onclick="push()">
+
+</form>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HOVER 효과</title>
+<style type="text/css">
+
+	table{
+		border-top: 2px solid red;
+		border-bottom: 1px solid red;
+		width: 60%;
+	}
+	/*직계자식은 >로 표현 후손은 스페이스바 차이점은 요소검사하면 차이 많이 남*/
+	tr>td{
+		text-align: center;
+	}
+
+	table th{
+		background: red;
+	  color: white;
+	
+	}
+	tr>td{
+		border-bottom: 2px dotted pink;
+	}
+	
+	table tr:HOVER/* 마우스 이벤트 포함 */{
+		background: pink;
+		
+	
+	}
+</style>
+</head>
+<body>
+<h2 align="center">table에 hover효과 부여하기</h2>
+<table align="center">
+	<tr>
+	<th>이름</th>
+	<th>주소</th>
+	<th>전화번호</th>
+	</tr>
+	<tr>
+	<td>효리</td>
+	<td>제주</td>
+	<td>1234</td>
+	</tr>
+	<tr>
+	<td>이진</td>
+	<td>뉴욕</td>
+	<td>5678</td>
+	</tr>
+		<tr>
+	<td>옥주현</td>
+	<td>서울</td>
+	<td>91011</td>
+	</tr>
+	
+
+</table>
+</body>
+</html>

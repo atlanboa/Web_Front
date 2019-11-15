@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.s-nav-row {
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.s-nav-row s-nav {
+	width: 10%;
+	margin: 0px auto;
+}
+
+.s-nav.p-3:hover {
+	cursor: pointer;
+	background: #dddddd;
+}
+#logo-hover:hover {
+	cursor: pointer;
+}
+
+.s-div-hover :hover {
+	cursor: pointer;
+	background: #dddddd;
+}
+
+.box {
+	width: 100%;
+	height: 200px;
+}
+
+.hi {
+	overflow: hidden;
+}
+</style>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!-- jquery 선언부가 먼저나오고 부트스트랩 선언부가 와야함 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script>
+	$(function() {
+		var foodlist;
+		var select = $("#select");
+		
+		select.change(function() {
+			var select_val = $(this).children("option:selected").text();
+			select = select_val;
+			alert(select);
+		});
+		
+		$('#searchBtn').click(function() {			
+			var searchText = $("#searchText").val();
+			alert(searchText);
+			var str = '';
+			alert("버튼클릭");
+			if(select == '전체'){
+				alert('전체시작');
+				$(foodlist).find('food').each(function(index, item){
+					alert("전체 시작");
+					var name = $(this).find('name').text();
+					var maker = $(this).find('maker').text();
+					var code = $(this).find('code').text();
+					var material = $(this).find('material').text();
+					var image = $(this).find('image').text();
+					
+					if(name.include(searchText) || maker.include(searchText) || material.include(searchText)){
+						alert("포함 됐다구요~~!!");
+						str += '<div id="detailBtn" class="media box hi s-div-hover" name="'+code+'">'
+						str += '<img src="image/'+image+'"class="align-self-center mr-3" style="width: 20%"><div class="media-body"> <h4 class="s-div-hover">';
+						str +=  name + '<span class="badge badge-secondary">' + maker + '</span>' + '</h4>';
+						str += 	'<hr>';
+						str += 	'<p>'+material+'</p>';
+						str +='</div>';
+						str += '</div>';
+						str += '<hr>'
+					}
+					alert(str);
+					$('.product').html(str);
+				});
+			}
+			else if(select == "상품명"){
+				$(foodlist).find('food').each(function(index, item){
+				 	alert("상품명 시작!!");
+					var name = $(this).find('name').text();
+					var maker = $(this).find('maker').text();
+					var code = $(this).find('code').text();
+					var material = $(this).find('material').text();
+					var image = $(this).find('image').text();
+					if(name.include(searchText)){
+						str += '<div id="detailBtn" class="media box hi s-div-hover" name="'+code+'">'
+						str += '<img src="image/'+image+'"class="align-self-center mr-3" style="width: 20%"><div class="media-body"> <h4 class="s-div-hover">';
+						str +=  name + '<span class="badge badge-secondary">' + maker + '</span>' + '</h4>';
+						str += 	'<hr>';
+						str += 	'<p>'+material+'</p>';
+						str +='</div>';
+						str += '</div>';
+						str += '<hr>'
+					}
+					alert(str);
+					$('.product').html(str);
+				});
+			}else if(select == "재료명"){
+				$(foodlist).find('food').each(function(index, item){
+					  var name = $(this).find('name').text();
+						var maker = $(this).find('maker').text();
+						var code = $(this).find('code').text();
+						var material = $(this).find('material').text();
+						var image = $(this).find('image').text();
+						if(material.includes(searchText)){
+							str += '<div id="detailBtn" class="media box hi s-div-hover" name="'+code+'">'
+							str += '<img src="image/'+image+'"class="align-self-center mr-3" style="width: 20%"><div class="media-body"> <h4 class="s-div-hover">';
+							str +=  name + '<span class="badge badge-secondary">' + maker + '</span>' + '</h4>';
+							str += 	'<hr>';
+							str += 	'<p>'+material+'</p>';
+							str +='</div>';
+							str += '</div>';
+							str += '<hr>'
+						}
+						$('.product').html(str);
+					});
+			}else if(select == "회사명"){
+				$(foodlist).find('food').each(function(index, item){
+					  var name = $(this).find('name').text();
+						var maker = $(this).find('maker').text();
+						var code = $(this).find('code').text();
+						var material = $(this).find('material').text();
+						var image = $(this).find('image').text();
+						if(maker.includes(searchText)){
+							str += '<div id="detailBtn" class="media box hi s-div-hover" name="'+code+'">'
+							str += '<img src="image/'+image+'"class="align-self-center mr-3" style="width: 20%"><div class="media-body"> <h4 class="s-div-hover">';
+							str +=  name + '<span class="badge badge-secondary">' + maker + '</span>' + '</h4>';
+							str += 	'<hr>';
+							str += 	'<p>'+material+'</p>';
+							str +='</div>';
+							str += '</div>';
+							str += '<hr>'
+						}
+						$('.product').html(str);
+					});
+			}
+			
+		}); 
+		
+		$.ajax({
+			type:'post',
+			url:'http://localhost:8888/Tproject02/foodInfo.xml',
+			dataType:'xml',
+			success:function(result){
+				foodlist = result;
+				var str = '';
+				$(result).find('food').each(function(index, item){
+					var name = $(this).find('name').text();
+					var maker = $(this).find('maker').text();
+					var code = $(this).find('code').text();
+					var material = $(this).find('material').text();
+					var image = $(this).find('image').text();
+					str += '<div id="detailBtn" class="media box hi s-div-hover" name="'+code+'">'
+					str += '<img src="image/'+image+'"class="align-self-center mr-3" style="width: 20%"><div class="media-body"> <h4 class="s-div-hover">';
+					str +=  name + '<span class="badge badge-secondary">' + maker + '</span>' + '</h4>';
+					str += 	'<hr>';
+					str += 	'<p>'+material+'</p>';
+					str +='</div>';
+					str += '</div>';
+					str += '<hr>'
+				});	
+				/* $('table tr:gt(0)').remove(); */
+				$('.products').append(str);
+			}
+		});
+		$('#productBtn').click(function() {
+			location.href = 'productPage.html';
+		})
+	});
+	
+	$(document).on("click","#detailBtn",function(){
+		location.href = 'detailProductPage.jsp?code='+$(this).attr('name');
+	});
+	
+	
+</script>
+</head>
+<body>
+	<div>
+		<!-- class="fixed-top" -->
+		<nav
+			class="navbar navbar-expand-sm bg-primary navbar-dark justify-content-end">
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary">회원가입</button>
+				<button type="button" class="btn btn-primary" data-toggle="modal"
+					data-target="#myModal">로그인</button>
+			</div>
+		</nav>
+		<div class="container bg-light">
+			<div class="row s-nav-row">
+				<div class="col-sm-2 s-nav">
+					<a href="mainPage.html"><img alt="" src="image/page_image/header-logo.jpg" id="logo-hover">	</a>
+				</div>
+				<div class="col-sm-2 s-nav p-3">공지사항</div>
+				<div id="productBtn"class="col-sm-2 s-nav p-3">상품정보</div>
+				<div class="col-sm-2 s-nav p-3">베스트섭취정보</div>
+				<div class="col-sm-2 s-nav p-3">내섭취정보</div>
+				<div class="col-sm-2 s-nav p-3">예상섭취정보</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid jumbotron text-center container"
+		style="background-color: rgb(153, 217, 234); margin-top: 10px; margin-bottom: 10px;">
+		<h1 style="color: white">WHAT WE PROVIDE</h1>
+		<hr width="500">
+		<br>
+		<div class="row">
+			<div class="col-sm-3 "></div>
+			<div class="col-sm-6 ">
+				<div class="row input-group mt-3 mb-3">
+
+					<div class="input-group mb-3">
+						<select id="select" name="job">
+							<option value="">전체</option>
+							<option value="학생">상품명</option>
+							<option value="회사원">재료명</option>
+							<option value="기타">회사명</option>
+						</select> 
+						<input id="searchText" type="text" class="form-control" placeholder="검색어를 입력하세요">
+						<div class="input-group-append">
+							<button id="searchBtn" class="btn btn-primary" type="button">OK</button>
+							<button class="btn btn-danger" type="button">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3 "></div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row ">
+			<div class="col-sm-2 "></div>
+			<div class="col-sm-8 products">
+			
+			</div>
+			<div class="col-sm-2 "></div>
+		</div>
+
+	</div>
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Login</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="exampleInputEmail1">Email address</label> <input
+							type="email" class="form-control" id="exampleInputEmail1"
+							aria-describedby="emailHelp" placeholder="Enter email"> <small
+							id="emailHelp" class="form-text text-muted">We'll never
+							share your email with anyone else.</small>
+					</div>
+					<div class="form-group">
+						<label for="exampleInputPassword1">Password</label> <input
+							type="password" class="form-control" id="exampleInputPassword1"
+							placeholder="Password">
+					</div>
+				</div>
+				<div class="modal-footer">
+			   	<button type="button" class="btn btn-primary" id="login" onclick="location.href = 'afterLoginPage.html'">로그인</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">비밀번호 찾기</button>	
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

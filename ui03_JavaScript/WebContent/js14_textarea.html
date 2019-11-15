@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	#resultView{
+		position: absolute;
+		top: 150px;
+		left: 20px;
+		width: 250px;
+		height: 200px;
+		border: 1px solid #f00;
+		margin-top: 10px;
+		margin-left: 10px;
+		font-size: 0.8em;
+		
+	}
+</style>
+<script type="text/javascript">
+		window.onload = function(){
+			var preview = document.getElementById("preview");
+			preview.onclick = processText; //버튼 클릭시 processText함수 호출 ... 클릭이벤트 연결
+		};
+		
+		function processText(){
+			//내가 입력한 내용일 줄단위로 resultView 영역에 뿌려지도록 로직을 작성
+			//복합연산자, innerHTML, for
+			var msg = document.getElementById("inputbox").value;
+			var msgList = msg.split('\n');
+			
+			var output='';
+			for(int i = 0; i < msgList.length; i++){
+				output += (i + 1) + '번째 줄 : ' + msgList[i] + '<br>';
+			}
+			document.getElementById("resultView").innerHTML =
+				"<font color = green>" + output + "</font>";
+		}
+</script>
+</head>
+<body>
+<textarea rows="5" cols="30" id = "inputbox"></textarea>
+<div>
+	<button id = "preview">preview</button>
+</div>
+<div id = "resultView"></div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!-- 
+변수 호이스팅
+::
+끌어올리다. 들어올리다.
+
+자바스크립트에서 호이스팅이란
+코드에 선언된 변수를 코드 상단으로 끌어올리는 현상을 말한다.
+지금 예제처럼 함수 내에서 선언된 변수는 (some) 함수의 최상위로 끌어올려진다.
+이 땐 값은 제외하고 선언부만 호이스팅 된다는 점에 주의하자
+
+만약에 함수 밖에 변수가 선언 되었다면 스크립트 최상단으로 호이스팅 된다. 
+
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>호이스팅 :: Hoisting</title>
+<script type="text/javascript">
+		//hoisting
+	  /* doSomething();
+		
+		function doSomething(){ //선언적 함수 선언
+			//var some; -> 밑에서 선언했지만 함수 최상위로 선언부를 끌어올린다.
+			alert("not defined : " + some); //undefined
+		
+		  var some = "WellBeing";
+			alert("defined : " + some);
+		} */
+		
+		//2. 전역변수 지역변수
+var name = "James";
+function showName(){
+		var name = "Gosling";//지역변수
+		console.log(name);
+}
+console.log(name); //James
+showName(); // Gosling
+</script>
+</head>
+<body>
+
+</body>
+</html>

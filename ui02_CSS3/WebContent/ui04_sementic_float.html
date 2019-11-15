@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+
+#header{
+width : 800px;
+background: red;
+text-align: center;
+margin: 0 auto;
+/* 이게 안될때가 있음 width 사이즈가 명확하지 않을 때
+   즉 width가 명확하고 div같은 블락킹 태그일때만 먹힘
+   이렇게 쓰면 중간정렬해줌
+   이게 안될때는 알아서 하기... */
+}
+
+#wrap{ 
+width : 800px;
+margin: 0 auto;
+
+}
+
+#aside{
+width : 200px;
+background: green;
+float: left;/* 왼쪽에서 오른쪽으로 띄어짐 */'
+}
+#content{
+width : 600px;
+background: blue;
+float: left;
+/* float: right;랑 똑같
+왜? 이미 200 600 값 준거에서 aside로 왼쪽 차지했으니 content는 왼쪽 그다음 왼쪽으로 되니까 결론적으로 오른쪽에 똑같이 배치된거임  */
+}
+</style>
+</head>
+<body>
+	<div id="header" >
+		<h1>Header</h1>
+	</div>
+	<div id="wrap">
+		<div id="aside">
+			<h1>Aside</h1>
+		</div>
+		<div id="content">
+			<h1>Content</h1>
+		</div>
+	</div>
+</body>
+</html>

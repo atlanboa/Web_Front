@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.angel{border: 2px; width : 200px; height: 200px;}
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+			var img1 = "<img src=./img/1.jpg>";
+			var img2 = "<img src=./img/2.jpg>";
+			var img3 = "<img src=./img/3.jpg>";
+			
+			var h1 = "<h1>Young Angels~~~~(하늬,사라이 빼고)</h1>";
+			
+			$('body').append(h1, img1, img2, img3);
+			$('img').addClass('angel');
+		});
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

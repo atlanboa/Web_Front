@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	body{
+		margin-left : 30%;
+		margin-top: 5%;
+		text-align: center;
+	}
+	thead{
+		background: magenta;/* 보라색 우선권은 얘보다 인라인에 있음 */
+	}
+	
+</style>
+</head>
+<body>
+	<table border="1" widht="50%">
+	<colgroup>
+		<col span="2" style="background: red" />
+		<col style="background: blue" />
+	
+	
+	</colgroup>
+	<thead>
+		<tr>
+			<th>Table Header</th>
+			<th>Table Header</th>
+			<th>Table Header</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td colspan="3">Table Data</td>
+		</tr>
+		<tr>
+			<td>Table Data</td>
+			<td>Table Data</td>
+			<td>Table Data</td>
+		</tr>
+		<tr>
+			<td>Table Data</td>
+			<td>Table Data</td>
+			<td>Table Data</td>
+		</tr>
+	
+	
+	</tbody>
+	
+	
+	<tfoot style="background: yellow">
+		<tr>
+			<td>Table Data</td>
+			<td>Table Data</td>
+			<td>Table Data</td>
+		</tr>
+	</tfoot>
+	
+	
+	
+	
+	</table>
+</body>
+</html>

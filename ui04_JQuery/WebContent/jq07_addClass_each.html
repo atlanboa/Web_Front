@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>addClass(), each(), this</title>
+<style>
+/* 클래스의 속성을 정의해 놓는다... */
+.high_light_0 { background : yellow}
+.high_light_1 { background : pink}
+.high_light_2 { background : green}
+.high_light_3 { background : cyan}
+.high_light_4 { background : purple}
+.high_light_5 { background : magenta}
+.high_light_6 { background : orange}
+.high_light_7 { background : red}
+
+/* 속성 추가 */
+.fontstyle{ color: blue; font-family: "궁서체";}
+.nth{ border: 5px black double;}
+
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+			/*
+				each() : 동일한 태그가 반복적으로 나올 때 적용하는 함수... 일종의 for문과 같다.
+				h1 태그의 갯수만큼 each() 함수가 실행된다... index가 내부적으로 돌아간다..0이 첫번째 인덱스
+			*/
+			
+			//1.
+			/* $('h1').each(function(index) {
+				$(this).addClass('high_light_' + index);	
+			}); */
+			
+			//2.
+			 $('h1').each(function(index, i) {
+				$(i).addClass('high_light_' + index);	
+			}); 
+			
+			//3.
+			/* $('h1:first').addClass('fontstyle');	
+			$('h1').first().addClass('fontstyle');	 */
+			$('h1:eq(5)').addClass('fontstyle');	
+			
+			//4. 짝수번째(:even), 홀수번째(:odd)
+			$('h1:even').addClass('nth');
+		});
+</script>
+
+</head>
+<body>
+<h1>Item-0</h1>
+<h1>Item-1</h1>
+<h1>Item-2</h1>
+<h1>Item-3</h1>
+<h1>Item-4</h1>
+<h1>Item-5</h1>
+<h1>Item-6</h1>
+<h1>Item-7</h1>
+</body>
+</html>

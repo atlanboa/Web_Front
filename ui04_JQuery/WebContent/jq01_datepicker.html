@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('#datepicker').datepicker();
+			
+			//버튼을 클릭하면 팝업창으로 선택한 날짜가 출력되도록 로직을 작성..
+			$('#dateBtn').click(function(){
+				alert("Today Date :: " + $('#datepicker').val());
+			});
+		});
+</script>
+</head>
+<body>
+Date : <input type = "text" id = "datepicker">
+<input type = "button" value = "날짜확인" id = "dateBtn">
+</body>
+</html>

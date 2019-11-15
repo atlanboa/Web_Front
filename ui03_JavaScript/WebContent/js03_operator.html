@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>복합연산자 | innerHTML</title>
+<script type="text/javascript">
+window.onload = function(){
+	
+		var list ='';
+		//복합연산자 사용
+		list += '<ul>';
+		list += '<li>Hello</li>';
+		list += '<li>JavaScript...!!</li>';
+		list += '</ul>';
+		
+		//html 문서에 출력...innerHTML
+		document.getElementById("resultView").innerHTML =
+			"<font color='red' size='6'>" + list + "</fond>";
+};
+
+var cup = "Coffee";
+var cup = "Green Tea";
+var cup = "Water";
+alert(cup);
+</script>
+</head>
+<body>
+<h2>innerHTML 사용하기</h2>
+<div id = "resultView">
+</div>
+</body>
+</html>

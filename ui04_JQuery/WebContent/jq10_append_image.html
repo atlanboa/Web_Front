@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+.angel{width : 200px; height: 200px; border:2px solid red;}
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+				$('img').addClass('angel');
+				//1. setTimeout을 사용해서 3초뒤에 첫번째 이미지가 body 태그 뒤에 붙도록...
+				/* setTimeout(function() {
+					$('body').append($('img:first'));
+				}, 3000); */
+				
+				//2. 2초 간격으로 계속 첫번째 이미지가 가도록...
+			/* 	setInterval(function() {
+					$('body').append($('img:first'));
+				}, 2000);  */
+				
+				//3.
+				setInterval(function() {
+					$('img').first().appendTo('body');
+				}, 2000); 
+				
+				//태그에 뭔가를 붙일 때는  append 내용에 태그를 붙일 때는 appendTo 
+		});
+</script>
+
+</head>
+<body>
+	<img src="img/1.jpg">
+	<img src="img/2.jpg">
+	<img src="img/3.jpg">
+</body>
+</html>

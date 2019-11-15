@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+table{width: 600px; height: auto; border: 5px solid pink;}
+th, td{text-align: center; border: 1px solid gray;}
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+			$('#send').on('click',function(){
+				//비동기 통신...
+				$.ajax({
+					type: 'post',
+					url:'http://localhost:8888/ui05_Ajax/member.xml',
+					dataType: 'xml',
+					
+					success:function(result){
+					var str='';
+					$(result).find('member').each(function(index, item) {
+							var name = $(this).find("name").text();
+							var age = $(this).find("age").text();
+							var addr = $(this).find("addr").text();		
+							
+							str += '<tr>';
+							str += '<td>'+name+'</td>';
+							str += '<td>'+age+'</td>';
+							str += '<td>'+addr+'</td>';
+							str += '</tr>';
+					});//each
+					
+					//동적으로 생성된 기존의 데이터 지우기..
+					$('table tr:gt(0)').remove();
+					
+					
+					$('table').append(str);
+					}//success
+				});
+			});
+		});
+</script>
+
+</head>
+<body>
+<a href="#" id="send">XML 데이터 가져오기</a><br>
+<table>
+		<tr>
+				<th>이 름</th><th>나 이</th><th>주 소</th>
+		</tr>
+</table>
+</body>
+</html>

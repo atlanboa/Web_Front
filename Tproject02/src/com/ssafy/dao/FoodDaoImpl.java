@@ -1,0 +1,332 @@
+package com.ssafy.dao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import com.ssafy.util.FoodNutritionSAXHandler;
+import com.ssafy.util.FoodSAXHandler;
+import com.ssafy.util.FoodSaxParser;
+import com.ssafy.vo.Food;
+import com.ssafy.vo.FoodPageBean;
+import com.ssafy.vo.SafeFoodException;
+
+import config.ServerInfo;
+
+public class FoodDaoImpl implements FoodDao{
+
+	public FoodDaoImpl() {
+//		loadData();
+	}
+	/**
+	 * 식품 영양학 정보와 식품 정보를  xml 파일에서 읽어온다.
+	 * @throws SQLException 
+	 */
+	static {
+		try {
+			Class.forName(ServerInfo.DRIVER_NAME);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+	public Connection getConnection() throws SQLException {
+		Connection conn = DriverManager.getConnection(ServerInfo.URL, ServerInfo.USER, ServerInfo.PASS);
+		return conn;
+	}
+	
+	public void loadData() {
+		
+	  //  FoodNutritionSaxPaser를 이용하여 Food 데이터들을 가져온다
+	  //  가져온 Food 리스트 데이터를 DB에 저장한다.	
+		FoodSaxParser fsp = new FoodSaxParser();
+		List<Food> list = fsp.getFoods();
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		
+		try {
+			conn = getConnection();	
+			System.out.println("");
+			
+			String query = "INSERT INTO food (code, name, support_per_eat, calory, carbo, protein, fat, sugar, natrium, chole, fattyacid, transfat, maker, material, img, allergy) "+
+			"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			
+			for(Food food: list) {
+				ps = conn.prepareStatement(query);
+				
+				ps.setInt(1, food.getCode());
+				ps.setString(2, food.getName());
+				ps.setDouble(3, food.getSupportpereat());
+				ps.setDouble(4, food.getCalory());
+				ps.setDouble(5, food.getCarbo());
+				ps.setDouble(6, food.getProtein());
+				ps.setDouble(7, food.getFat());
+				ps.setDouble(8, food.getSugar());
+				ps.setDouble(9, food.getNatrium());
+				ps.setDouble(10, food.getChole());
+				ps.setDouble(11, food.getFattyacid());
+				ps.setDouble(12, food.getTransfat());
+				ps.setString(13, food.getMaker());
+				ps.setString(14, food.getMaterial());
+				ps.setString(15, food.getImg());
+				ps.setString(16, food.getAllergy());
+				
+				ps.executeUpdate();
+			}
+
+			
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+				
+			}catch (Exception e) {
+
+			}
+		}			
+	}
+	
+	
+	/**
+	 * 검색 조건(key) 검색 단어(word)에 해당하는 식품 정보(Food)의 개수를 반환. 
+	 * web에서 구현할 내용. 
+	 * web에서 페이징 처리시 필요 
+	 * @param bean  검색 조건과 검색 단어가 있는 객체
+	 * @return 조회한  식품 개수
+	 */
+	public int foodCount(FoodPageBean  bean){
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int ret=-1;
+		//구현하세요.
+		try {
+			conn = getConnection();
+			bean.getKey(); bean.getWord();
+			String query = "SELECT COUNT(*) FROM food WHERE "+bean.getKey()+" LIKE '%"+bean.getWord()+"%'";
+			ps = conn.prepareStatement(query);
+
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				ret = rs.getInt(0);
+				System.out.println(ret);
+			}
+		}catch (Exception e) {
+			
+		}finally {
+			try {
+				if(rs!=null) rs.close();
+				if(ps!=null) ps.close();
+				if(conn!=null) conn.close();
+			}catch (Exception e) {
+			}
+
+			
+			
+		}
+		
+		
+		
+		
+		return ret;
+	}
+	
+	/**
+	 * 검색 조건(key) 검색 단어(word)에 해당하는 식품 정보(Food)를  검색해서 반환.  
+	 * @param bean  검색 조건과 검색 단어가 있는 객체
+	 * @return 조회한 식품 목록
+	 */
+	public List<Food> searchAll(FoodPageBean  bean){
+		
+		List<Food> finds = new LinkedList<Food>();
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		if(bean !=null) {
+			
+			String key = bean.getKey();
+			String word = bean.getWord();
+			if(!key.equals("all") && word!=null && !word.trim().equals("")) {
+				try {
+					
+					conn = getConnection();
+					
+					String query = "SELECT * FROM food WHERE "+key+" like '%"+word+"%'";
+					ps = conn.prepareStatement(query);
+
+					
+					rs = ps.executeQuery();
+					
+					while(rs.next()) {
+						
+						finds.add(new Food(rs.getInt("code"),
+								rs.getString("name"),
+								rs.getDouble("support_per_eat"),
+								rs.getDouble("calory"),
+								rs.getDouble("carbo"),
+								rs.getDouble("protein"),
+								rs.getDouble("fat"),
+								rs.getDouble("sugar"),
+								rs.getDouble("natrium"),
+								rs.getDouble("chole"),
+								rs.getDouble("fattyacid"),
+								rs.getDouble("transfat"),
+								rs.getString("maker"),
+								rs.getString("material"),
+								rs.getString("img"),
+								rs.getString("allergy")
+								));
+						
+						
+					}
+					for(int i=0; i<finds.size(); i++) {
+						System.out.println(finds.get(i));
+					}
+					
+				}catch (Exception e) {
+					
+				}finally {
+					try {
+						if(rs!=null) rs.close();
+						if(ps!=null) ps.close();
+						if(conn!=null) conn.close();
+					}catch (Exception e) {
+					}	
+				}	
+			}else {
+				try {
+					
+					conn = getConnection();
+					
+					String query = "SELECT * FROM food";
+					ps = conn.prepareStatement(query);
+					
+					
+					rs = ps.executeQuery();
+					
+					while(rs.next()) {
+						
+						finds.add(new Food(rs.getInt("code"),
+								rs.getString("name"),
+								rs.getDouble("support_per_eat"),
+								rs.getDouble("calory"),
+								rs.getDouble("carbo"),
+								rs.getDouble("protein"),
+								rs.getDouble("fat"),
+								rs.getDouble("sugar"),
+								rs.getDouble("natrium"),
+								rs.getDouble("chole"),
+								rs.getDouble("fattyacid"),
+								rs.getDouble("transfat"),
+								rs.getString("maker"),
+								rs.getString("material"),
+								rs.getString("img"),
+								rs.getString("allergy")
+								));
+						
+						
+					}
+					for(int i=0; i<finds.size(); i++) {
+						System.out.println(finds.get(i));
+					}
+					
+				}catch (Exception e) {
+					
+				}finally {
+					try {
+						if(rs!=null) rs.close();
+						if(ps!=null) ps.close();
+						if(conn!=null) conn.close();
+					}catch (Exception e) {
+					}	
+				}
+			}
+		}
+		return finds;
+	}
+	
+	/**
+	 * 식품 코드에 해당하는 식품정보를 검색해서 반환. 
+	 * @param code	검색할 식품 코드
+	 * @return	식품 코드에 해당하는 식품 정보, 없으면 null이 리턴됨
+	 */
+	public Food search(int code) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Food food = null;
+		// 코드에 맞는 식품 검색하여 리턴
+		try {
+			conn = getConnection();
+			String query = "SELECT * FROM food WHERE code=?";
+			
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, code);
+			
+			rs =ps.executeQuery();
+			
+			if(rs.next()) {
+				food = new Food(rs.getInt("code"),
+								rs.getString("name"),
+								rs.getDouble("support_per_eat"),
+								rs.getDouble("calory"),
+								rs.getDouble("carbo"),
+								rs.getDouble("protein"),
+								rs.getDouble("fat"),
+								rs.getDouble("sugar"),
+								rs.getDouble("natrium"),
+								rs.getDouble("chole"),
+								rs.getDouble("fattyacid"),
+								rs.getDouble("transfat"),
+								rs.getString("maker"),
+								rs.getString("material"),
+								rs.getString("img"),
+								rs.getString("allergy")
+								);
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+		
+		return food;
+	}
+
+	/**
+	 * 가장 많이 검색한 Food  정보 리턴하기 
+	 * web에서 구현할 내용.  
+	 * @return
+	 */
+	public List<Food> searchBest() {
+		return null;
+	}
+	
+	public List<Food> searchBestIndex() {
+		return null;
+	}
+	
+	public static void main(String[] args) {
+		FoodDaoImpl dao = new FoodDaoImpl();
+		//dao.loadData();
+	}
+	
+	public static void print(List<Food> foods) {
+		for (Food food : foods) {
+			System.out.println(food);
+		}
+	}
+}

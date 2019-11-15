@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+		function push(){
+			//window.open("http://lab.ssafy.com", "Open Window", "width=600, height=600",true);
+			var retwindow = window.open("http://localhost:8888/ui03_JavaScript/js11_open.jsp", "", "width=600, height=600",true);
+		
+			setTimeout(function(){ //딱 한번만 호출...
+				retwindow.close();		
+			}, 3000);
+		}
+</script>
+</head>
+<body>
+<button onclick="push()">이곳을 클릭하세요</button>
+</body>
+</html>

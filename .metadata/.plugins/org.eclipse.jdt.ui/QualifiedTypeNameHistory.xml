@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.InterruptedException"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
+<fullyQualifiedTypeName name="config.ServerInfo"/>
+<fullyQualifiedTypeName name="com.ssafy.dao.FoodDaoImpl"/>
+</qualifiedTypeNameHistroy>

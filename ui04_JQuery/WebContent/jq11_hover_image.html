@@ -1,0 +1,51 @@
+<!-- 
+hover 이벤트 ::
+mouseenter, mouseleave 이벤트 포커스 두 개를 동시에 가지고 있는 이벤트
+
+ -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>hover(), addClass(), removeClass(), on(), click()</title>
+<style>
+.Large{ width : 200px; border: 2px solid red;}
+.reverse{ background: blue; color : white;}
+</style>
+<script src = "js/jquery-3.4.1.js"></script>
+<script>
+		$(function(){
+			$('img').hover(function() {
+				$(this).addClass('Large');
+			}, function() {
+				$(this).removeClass('Large');
+			});
+			
+			//2.Angels Girl에 hover 효과를 적용
+			
+			$('h2').hover(function() {
+				$(this).addClass('reverse');
+			}, function() {
+				$(this).removeClass('reverse');
+			});
+			
+			//3.h2태그 부분을 클릭하면 제목 옆부분에 *이 찍히도록 로직을 작성...(innerHTML | html())
+			//on() 미래에 존재하는 태그에 적용되는 함수
+			$('h2').one('click', function() {
+				$(this).html(function(index, html) {
+					return html + '★';
+				});//html
+				
+			});
+		});
+</script>
+
+</head>
+<body>
+<h2>Angels Girl</h2>
+<img src="img/1.jpg" width = 100><br>
+<img src="img/2.jpg" width = 100><br>
+<img src="img/3.jpg" width = 100><br>
+</body>
+</html>
